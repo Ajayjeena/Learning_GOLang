@@ -13,14 +13,14 @@ func main() {
 
 	wg.Add(2)
 
-	go func(ch chan int, wg *sync.WaitGroup) {
+	go func(ch <-chan int, wg *sync.WaitGroup) {
 		//val,isChanelOpen := <-myCh
 		fmt.Println(<-myCh)
 		fmt.Println(<-myCh)
 		wg.Done()
 	}(myCh, wg)
 
-	go func(ch chan int, wg *sync.WaitGroup) {
+	go func(ch chan<- int, wg *sync.WaitGroup) {
 		myCh <- 5
 		myCh <- 6
 		close(myCh)
